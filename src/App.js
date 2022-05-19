@@ -3,6 +3,7 @@ import Images from "./Images";
 import './App.css';
 
 const rickMortyAPI = `https://rickandmortyapi.com/api/character/`;
+
 const randomizer = () => {
   const arrayID = [];
 
@@ -27,7 +28,6 @@ const App = () => {
   }
 
   useEffect(() => {
-    console.log('render');
     setNewImages();
   }, []);
 
