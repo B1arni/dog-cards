@@ -1,39 +1,44 @@
-import React from "react";
+import React, {useState, useEffect} from "react";
+import Images from "./Images";
 import './App.css';
 
-class App extends React.Component {
-    constructor() {
-        super();
-        this.state = {
-            card: null
-        };
-        this.changeImageHandler = this.changeImageHandler.bind(this)
-    }
+const rickMortyAPI = `https://rickandmortyapi.com/api/character/`;
+const randomizer = () => {
+  const arrayID = [];
 
-    setImage () {
-        return fetch('https://dog.ceo/api/breeds/image/random').then(response => response.json()).then(data => {
-           this.setState({
-               card: data.message,
-           })
-       });
-    }
+  for (let i = 0; i < 3; i++) {
+    arrayID.push(Math.floor(Math.random() * 825));
+  };
 
-    componentDidMount() {
-        this.setImage();
-    }
+  return [...arrayID];
+}
 
-    changeImageHandler() {
-        this.setImage();
-    }
+const App = () => {
+  const [images, setImages] = useState(null);
 
-    render () {
-        return (
-            <div className="app">
-                <img className='image' src={this.state.card}/>
-                <button className="button" onClick={this.changeImageHandler}>Change image</button>
-            </div>
-        )
-    }
+  async function setNewImages () {
+    let response = await fetch(rickMortyAPI + randomizer());
+    let data = await response.json();
+    await setImages(data);
+  };
+
+  function changeImagesHandler() {
+    setNewImages();
+  }
+
+  useEffect(() => {
+    console.log('render');
+    setNewImages();
+  }, []);
+
+  if (images !== null) {
+    return (
+      <div className="app">
+        <Images className='images' images={images} />
+        <button className="change-image-button" onClick={changeImagesHandler}>Change images</button>
+      </div>
+    );
+  }
 }
 
 export default App;
