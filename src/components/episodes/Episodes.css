@@ -1,0 +1,29 @@
+.episodes {
+    display: flex;
+    flex-direction: column;
+    margin: auto;
+    align-items: center;
+    justify-content: center;
+    gap: 15px;
+    width: 90%;
+}
+
+.episode-info-container {
+        display: flex;
+        width: 100%;
+        gap: 10px;
+}
+
+.episode-info-list {
+    flex: 1;
+    height: 100px;
+    margin: auto;
+    background-color: rgb(97, 91, 91);
+    border-radius: 10px;
+    font-family: 'Roboto';
+    color: white;
+}
+
+.episode-info {
+    padding: 2px;
+}

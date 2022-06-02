@@ -1,39 +1,24 @@
-import React from "react";
+import { BrowserRouter, Routes, Route } from "react-router-dom";
 import './App.css';
+import Characters from "./components/characters/Characters";
+import Episodes from "./components/episodes/Episodes";
+import Locations from './components/locations/Locations';
+import Navbar from "./components/Navbar/Navbar";
+import Todo from "./components/todo/Todo";
 
-class App extends React.Component {
-    constructor() {
-        super();
-        this.state = {
-            card: null
-        };
-        this.changeImageHandler = this.changeImageHandler.bind(this)
-    }
-
-    setImage () {
-        return fetch('https://dog.ceo/api/breeds/image/random').then(response => response.json()).then(data => {
-           this.setState({
-               card: data.message,
-           })
-       });
-    }
-
-    componentDidMount() {
-        this.setImage();
-    }
-
-    changeImageHandler() {
-        this.setImage();
-    }
-
-    render () {
-        return (
-            <div className="app">
-                <img className='image' src={this.state.card}/>
-                <button className="button" onClick={this.changeImageHandler}>Change image</button>
-            </div>
-        )
-    }
+const App = () => {
+      return (
+        <BrowserRouter>
+          <Routes>
+            <Route path="/" element={<Navbar />}>
+              <Route index element={<Characters />} />
+              <Route path="locations" element={<Locations />} />
+              <Route path="episodes" element={<Episodes />} />
+              <Route path="todo" element={<Todo />} />
+            </Route>
+          </Routes>
+        </BrowserRouter>
+      );
 }
 
 export default App;
