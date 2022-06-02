@@ -1,9 +1,0 @@
-.images {
-    display: flex;
-    gap: 10px;
-}
-
-img {
-    flex: 1;
-    border-radius: 10px;
-}

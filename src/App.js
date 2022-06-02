@@ -1,44 +1,24 @@
-import React, {useState, useEffect} from "react";
-import Images from "./Images";
+import { BrowserRouter, Routes, Route } from "react-router-dom";
 import './App.css';
-
-const rickMortyAPI = `https://rickandmortyapi.com/api/character/`;
-
-const randomizer = () => {
-  const arrayID = [];
-
-  for (let i = 0; i < 3; i++) {
-    arrayID.push(Math.floor(Math.random() * 825));
-  };
-
-  return [...arrayID];
-}
+import Characters from "./components/characters/Characters";
+import Episodes from "./components/episodes/Episodes";
+import Locations from './components/locations/Locations';
+import Navbar from "./components/Navbar/Navbar";
+import Todo from "./components/todo/Todo";
 
 const App = () => {
-  const [images, setImages] = useState(null);
-
-  async function setNewImages () {
-    let response = await fetch(rickMortyAPI + randomizer());
-    let data = await response.json();
-    await setImages(data);
-  };
-
-  function changeImagesHandler() {
-    setNewImages();
-  }
-
-  useEffect(() => {
-    setNewImages();
-  }, []);
-
-  if (images !== null) {
-    return (
-      <div className="app">
-        <Images className='images' images={images} />
-        <button className="change-image-button" onClick={changeImagesHandler}>Change images</button>
-      </div>
-    );
-  }
+      return (
+        <BrowserRouter>
+          <Routes>
+            <Route path="/" element={<Navbar />}>
+              <Route index element={<Characters />} />
+              <Route path="locations" element={<Locations />} />
+              <Route path="episodes" element={<Episodes />} />
+              <Route path="todo" element={<Todo />} />
+            </Route>
+          </Routes>
+        </BrowserRouter>
+      );
 }
 
 export default App;

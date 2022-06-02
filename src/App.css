@@ -1,16 +1,4 @@
-.app {
-    display: flex;
-    flex-direction: column;
-    gap: 15px;
-    width: 90%;
-    margin: auto;
-}
-
-.images {
-    width: 100%;
-}
-
-.change-image-button {
+.change-content-button {
     width: 40%;
     margin: auto;
     padding-top: 10px;
@@ -25,10 +13,10 @@
     cursor: pointer;
 }
 
-.change-image-button:hover{
+.change-content-button:hover{
     background-color: rgb(150, 186, 59);
 }
 
-.change-image-button:active {
+.change-content-button:active {
     background-color: rgb(175, 225, 50);
 }
